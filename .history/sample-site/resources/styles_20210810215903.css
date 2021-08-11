@@ -1,0 +1,60 @@
+h1 {
+    color: red;
+}
+
+p, li {
+    color: green;
+}
+
+li {
+    list-style-type: disc;
+}
+
+li.special {
+    color: orange;
+    font-weight: bold;
+}
+
+li em {
+    color: rebeccapurple;
+}
+
+h1 + p {
+    font-size: 200%;
+    color: blue;
+}
+
+a:link {
+    color: pink;
+}
+a:visited {
+    color: green;
+}
+a:hover {
+    text-decoration: none;
+}
+
+.outer {
+    border: 5px solid black
+}
+
+.inner {
+    padding: 10px;
+    width: calc(50%);
+    background-color: rebeccapurple;
+    color: white;
+}
+
+.box {
+    margin: 30px;
+    width: 100px;
+    height: 100px;
+    background-image: url('rabbit320.webm');
+    transform: rotate(0.8turn);
+}
+
+@media (min-width: 300000em) {
+    body {
+        background-color: blue;
+    }
+}
