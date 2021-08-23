@@ -79,11 +79,11 @@
       }
 
       Teacher.prototype = Object.create(Person.prototype);
-      Object.defineProperty(Teacher.prototype, 'constructor', {
+      Teacher.prototype. constructor = {
           value : Teacher,
           enumerable : false,
           writable : true
-      });
+      };
 
       Teacher.prototype.greeting = function() {
         var prefix;
