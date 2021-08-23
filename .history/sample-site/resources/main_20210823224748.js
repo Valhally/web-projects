@@ -83,7 +83,7 @@ class Ball extends Shape {
 
 class EvilCircle extends Shape {
     constructor(x, y, exists) {
-        super(x, y, 10, 10, exists);
+        super(x, y, 20, 20, exists);
         this.color = 'white';
         this.size = 10;
 

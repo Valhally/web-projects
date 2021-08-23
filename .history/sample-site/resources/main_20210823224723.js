@@ -83,7 +83,7 @@ class Ball extends Shape {
 
 class EvilCircle extends Shape {
     constructor(x, y, exists) {
-        super(x, y, 10, 10, exists);
+        super(x, y, 20, 20, exists);
         this.color = 'white';
         this.size = 10;
 
@@ -125,6 +125,7 @@ class EvilCircle extends Shape {
     }
 
     setControls() {
+        key
         window.onkeydown = e => {
             switch(e.key) {
                 case 'a':
@@ -137,24 +138,7 @@ class EvilCircle extends Shape {
                     this.wDown = true;
                     break;
                 case 's':
-                    this.sDown = true;
-                    break;
-            }
-        }
-
-        window.onkeyup = e => {
-            switch(e.key) {
-                case 'a':
-                    this.aDown = false;
-                    break;
-                case 'd':
-                    this.dDown = false;
-                    break;
-                case 'w':
-                    this.wDown = false;
-                    break;
-                case 's':
-                    this.sDown = false;
+                    this.y += this.velY;
                     break;
             }
         }

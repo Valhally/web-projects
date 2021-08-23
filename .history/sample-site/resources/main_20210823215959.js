@@ -6,8 +6,6 @@ const ctx = canvas.getContext('2d');
 const width = canvas.width = window.innerWidth;
 const height = canvas.height = window.innerHeight;
 
-const para = document.querySelector('p');
-
 function random(min,max) {
   const num = Math.floor(Math.random() * (max - min)) + min;
   return num;
@@ -82,15 +80,10 @@ class Ball extends Shape {
 }
 
 class EvilCircle extends Shape {
-    constructor(x, y, exists) {
-        super(x, y, 10, 10, exists);
+    constructor(x, y, color, size, exists) {
+        super(x, y, 20, 20, exists);
         this.color = 'white';
         this.size = 10;
-
-        this.aDown = false;
-        this.sDown = false;
-        this.wDown = false;
-        this.dDown = false;
     }
 
     draw() {
@@ -101,12 +94,7 @@ class EvilCircle extends Shape {
         ctx.stroke();
     }
 
-    update() {
-        if(this.aDown) this.x -= this.velX;
-        if(this.dDown) this.x += this.velX;
-        if(this.wDown) this.y -= this.velY;
-        if(this.sDown) this.y += this.velY;
-
+    checkBounds() {
         if((this.x + this.size) >= width) {
             this.x -= this.size;
           }
@@ -128,33 +116,16 @@ class EvilCircle extends Shape {
         window.onkeydown = e => {
             switch(e.key) {
                 case 'a':
-                    this.aDown = true;
+                    this.x -= this.velX;
                     break;
                 case 'd':
-                    this.dDown = true;
+                    this.x += this.velX;
                     break;
                 case 'w':
-                    this.wDown = true;
+                    this.y -= this.velY;
                     break;
                 case 's':
-                    this.sDown = true;
-                    break;
-            }
-        }
-
-        window.onkeyup = e => {
-            switch(e.key) {
-                case 'a':
-                    this.aDown = false;
-                    break;
-                case 'd':
-                    this.dDown = false;
-                    break;
-                case 'w':
-                    this.wDown = false;
-                    break;
-                case 's':
-                    this.sDown = false;
+                    this.y += this.velY;
                     break;
             }
         }
@@ -178,11 +149,12 @@ class EvilCircle extends Shape {
 
 let balls = [];
 let evil = new EvilCircle(
-    random(0 + 10, width - 10),
-    random(0 + 10, height - 10),
+    random(0 + size, width - size),
+    random(0 + size, height - size),
+    randomColor(),
+    size,
     true 
 );
-evil.setControls();
 
 while(balls.length < 25) {
   const size = random(10,20);
@@ -202,22 +174,11 @@ function loop() {
   ctx.fillStyle = 'rgba(0,0,0,0.25)';
   ctx.fillRect(0,0,width,height);
 
-  let ballCount = 0;
-
   for(let i = 0; i < balls.length; i++) {
-    if(!balls[i].exists) continue;
     balls[i].draw();
     balls[i].update();
     balls[i].collisionDetect();
-
-    ballCount++;
   }
-
-  evil.draw();
-  evil.update();
-  evil.collisionDetect();
-
-  para.textContent = '还剩' + ballCount + '个球';
 
   requestAnimationFrame(loop);
 }
