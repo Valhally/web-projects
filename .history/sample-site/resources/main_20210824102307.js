@@ -5,9 +5,3 @@ let promise2 = promise.then(response => {
     else
         return response.blob();
 });
-let promise3 = promise2.then(myBlob => {
-    let objectURL = URL.createObjectURL(myBlob);
-    let image = document.createElement('img');
-    image.src = objectURL;
-    document.body.appendChild(image);
-});
