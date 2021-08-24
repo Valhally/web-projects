@@ -1,5 +1,3 @@
-// 设置画布
-
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 
@@ -60,7 +58,7 @@ class Shape {
 
     collisionDetect() {
         for(let j = 0; j < balls.length; j++) {
-            if(this !== balls[j]) {
+            if(this !== balls[j] && balls[j].exists) {
               const dx = this.x - balls[j].x;
               const dy = this.y - balls[j].y;
               const distance = Math.sqrt(dx * dx + dy * dy);
